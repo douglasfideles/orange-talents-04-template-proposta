@@ -1,11 +1,10 @@
 package br.com.zuporange.proposta;
 
 import java.net.URI;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,8 +29,14 @@ public class PropostaController {
 			UriComponentsBuilder uriComponentsBuilder) {
 		
 		Proposta proposta = propostaRequest.toModel();
-		propostaRepository.save(proposta);
+		Optional<Proposta> checarDocumento = propostaRepository.findByDocumento(propostaRequest.getDocumento());
+		if(checarDocumento.isPresent()) {
+			
+			return ResponseEntity.status(422).build();
+			
+		}
 		
+		propostaRepository.save(proposta);
 		URI uriProposta = uriComponentsBuilder.path("/propostas/{id}").build(proposta.getId());
 		return ResponseEntity.created(uriProposta).body(new PropostaResponse(proposta));
 		

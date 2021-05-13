@@ -68,9 +68,6 @@ public class Proposta {
 		return id;
 	}
 
-
-
-
 	public String getDocumento() {
 		return documento;
 	}
