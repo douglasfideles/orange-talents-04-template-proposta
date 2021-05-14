@@ -17,11 +17,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class PropostaController {
 	
 	private PropostaRepository propostaRepository;
-	
+	private PropostaFeignClient propostaFeignClient;
 
-	public PropostaController(PropostaRepository propostaRepository) {
-		super();
+	public PropostaController(PropostaRepository propostaRepository, PropostaFeignClient propostaFeignClient) {
+
 		this.propostaRepository = propostaRepository;
+		this.propostaFeignClient = propostaFeignClient;
 	}
 
 	@PostMapping
@@ -37,6 +38,16 @@ public class PropostaController {
 		}
 		
 		propostaRepository.save(proposta);
+		
+		try {
+			
+			
+			
+		} catch (Exception e) {
+			
+			
+		}
+		
 		URI uriProposta = uriComponentsBuilder.path("/propostas/{id}").build(proposta.getId());
 		return ResponseEntity.created(uriProposta).body(new PropostaResponse(proposta));
 		
