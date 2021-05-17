@@ -16,7 +16,7 @@ private String id;
 
 	private BigDecimal salario;
 	
-
+	
 	public PropostaResponse(Proposta proposta) {
 		
 		id = proposta.getId();
@@ -51,7 +51,6 @@ private String id;
 	public BigDecimal getSalario() {
 		return salario;
 	}
-	
-	
+
 	
 }

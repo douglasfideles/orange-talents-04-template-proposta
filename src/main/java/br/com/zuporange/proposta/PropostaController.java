@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import feign.FeignException;
+
 @RestController
 @RequestMapping("/propostas")
 public class PropostaController {
 	
 	private PropostaRepository propostaRepository;
 	private PropostaFeignClient propostaFeignClient;
-
+	
 	public PropostaController(PropostaRepository propostaRepository, PropostaFeignClient propostaFeignClient) {
 
 		this.propostaRepository = propostaRepository;
@@ -39,14 +41,24 @@ public class PropostaController {
 		
 		propostaRepository.save(proposta);
 		
+
 		try {
 			
+			AnalisePropostaRequest analiseRequest = new AnalisePropostaRequest(proposta.getDocumento(), proposta.getNome(), proposta.getId());
 			
+			AnalisePropostaResponse resultadoConsulta =  propostaFeignClient.solicitacao(analiseRequest);
 			
-		} catch (Exception e) {
+			Status status = resultadoConsulta.status();
 			
+			proposta.setStatus(status);
+			
+		} catch (FeignException.UnprocessableEntity unprocessableTntity) {
+			
+			proposta.setStatus(Status.NAO_ELEGIVEL);
 			
 		}
+		
+		propostaRepository.save(proposta);
 		
 		URI uriProposta = uriComponentsBuilder.path("/propostas/{id}").build(proposta.getId());
 		return ResponseEntity.created(uriProposta).body(new PropostaResponse(proposta));

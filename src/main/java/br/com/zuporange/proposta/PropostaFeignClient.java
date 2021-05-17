@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface PropostaFeignClient {
 
 	@PostMapping("/api/solicitacao")
-	void solicitacao();
+	AnalisePropostaResponse solicitacao(AnalisePropostaRequest request);
 	
 }
