@@ -2,9 +2,8 @@ package br.com.zuporange.proposta;
 
 import java.math.BigDecimal;
 
-public class PropostaResponse {
-	
-	private String id;
+public class PropostaDetalheResponse {
+
 	
 	private String documento;
 
@@ -16,20 +15,15 @@ public class PropostaResponse {
 
 	private BigDecimal salario;
 	
-	
-	public PropostaResponse(Proposta proposta) {
+	public PropostaDetalheResponse(Proposta proposta) {
 		
-		id = proposta.getId();
+
 		documento = proposta.getDocumento();
 		email = proposta.getEmail();
 		nome = proposta.getNome();
 		endereco = proposta.getEndereco();
 		salario = proposta.getSalario();
-		
-	}
-
-	public String getId() {
-		return id;
+	
 	}
 
 	public String getDocumento() {
@@ -51,6 +45,8 @@ public class PropostaResponse {
 	public BigDecimal getSalario() {
 		return salario;
 	}
-
+	
+	
+	
 	
 }

@@ -6,6 +6,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,5 +63,20 @@ public class PropostaController {
 		return ResponseEntity.created(uriProposta).body(new PropostaResponse(proposta));
 		
 	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<PropostaDetalheResponse> checarProposta(@PathVariable String id){
+		
+		Optional<Proposta> proposta = propostaRepository.findById(id);
+		
+		if(proposta.isPresent()) {
+			
+			return ResponseEntity.ok(new PropostaDetalheResponse(proposta.get()));
+			
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+	
 	
 }

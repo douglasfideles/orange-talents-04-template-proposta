@@ -40,14 +40,14 @@ public class CartaoScheduler {
 				
 				Cartao cartao = cartaoResponse.toModel();
 				
-				System.out.println(cartao.getId());
+				//System.out.println(cartao.getId());
 				
 				cartaoRepository.save(cartao);
 				
 				
 			} catch (Exception e) {
 				
-				System.out.println("Erro ao associar proposta ao cartão: " + proposta.getId());
+				//System.out.println("Erro ao associar proposta ao cartão: " + proposta.getId());
 				
 			}
 			
