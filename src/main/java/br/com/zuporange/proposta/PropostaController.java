@@ -25,6 +25,7 @@ public class PropostaController {
 
 		this.propostaRepository = propostaRepository;
 		this.propostaFeignClient = propostaFeignClient;
+		
 	}
 
 	@PostMapping
@@ -41,15 +42,11 @@ public class PropostaController {
 		
 		propostaRepository.save(proposta);
 		
-
 		try {
 			
 			AnalisePropostaRequest analiseRequest = new AnalisePropostaRequest(proposta.getDocumento(), proposta.getNome(), proposta.getId());
-			
 			AnalisePropostaResponse resultadoConsulta =  propostaFeignClient.solicitacao(analiseRequest);
-			
 			Status status = resultadoConsulta.status();
-			
 			proposta.setStatus(status);
 			
 		} catch (FeignException.UnprocessableEntity unprocessableTntity) {
@@ -58,8 +55,8 @@ public class PropostaController {
 			
 		}
 		
-		propostaRepository.save(proposta);
 		
+		propostaRepository.save(proposta);		
 		URI uriProposta = uriComponentsBuilder.path("/propostas/{id}").build(proposta.getId());
 		return ResponseEntity.created(uriProposta).body(new PropostaResponse(proposta));
 		
