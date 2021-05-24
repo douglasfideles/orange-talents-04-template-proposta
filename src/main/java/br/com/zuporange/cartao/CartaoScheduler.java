@@ -31,7 +31,7 @@ public class CartaoScheduler {
 	public CartaoScheduler() {
 	}
 	
-	@Scheduled(fixedDelay = 1000)
+	@Scheduled(fixedDelay = 1000 * 60)
 	public void associaCartaoProposta() {
 		
 		List<Proposta> propostas = propostaRepository.findByStatus(Status.ELEGIVEL);

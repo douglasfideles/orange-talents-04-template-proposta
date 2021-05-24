@@ -6,4 +6,6 @@ import br.com.zuporange.proposta.Proposta;
 
 public interface CartaoRepository extends CrudRepository<Cartao, Long>{
 
+	
+	
 }
