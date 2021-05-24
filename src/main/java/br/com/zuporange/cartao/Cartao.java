@@ -23,11 +23,7 @@ public class Cartao {
 	private String titular;
 	
 	private Integer limite;
-	
-	@OneToOne @JoinColumn(name="proposta")
-    private Proposta proposta;
-    
-    
+
     @Deprecated
 	public Cartao() {
 	}
@@ -57,10 +53,5 @@ public class Cartao {
 		return limite;
 	}
 
-	public Proposta getProposta() {
-		return proposta;
-	}
-    
-    
 
 }

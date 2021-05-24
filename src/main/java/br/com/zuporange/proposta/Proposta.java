@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -43,6 +44,9 @@ public class Proposta {
 	@Enumerated(EnumType.STRING)
 	private Status status;
 
+	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	private Cartao cartao;
+	
 	@Deprecated
 	public Proposta() {
 
@@ -60,6 +64,17 @@ public class Proposta {
 	}*/
 
 	
+	public Proposta(String documento, String email, String nome, String endereco, BigDecimal salario, Cartao cartao) {
+
+		this.documento = documento;
+		this.email = email;
+		this.nome = nome;
+		this.endereco = endereco;
+		this.salario = salario;
+		this.cartao = cartao;
+		
+	}
+	
 	public Proposta(String documento, String email, String nome, String endereco, BigDecimal salario) {
 
 		this.documento = documento;
@@ -67,6 +82,7 @@ public class Proposta {
 		this.nome = nome;
 		this.endereco = endereco;
 		this.salario = salario;
+		
 		
 	}
 	
@@ -104,5 +120,15 @@ public class Proposta {
 		this.status = status;
 		
 	}
+
+	public Cartao getCartao() {
+		return cartao;
+	}
+
+	public void setCartao(Cartao cartao) {
+		this.cartao = cartao;
+	}
+	
+	
 	
 }

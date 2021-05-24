@@ -1,10 +1,13 @@
 package br.com.zuporange.cartao;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import org.slf4j.LoggerFactory;
 
 import br.com.zuporange.proposta.Proposta;
 import br.com.zuporange.proposta.PropostaRepository;
@@ -23,6 +26,7 @@ public class CartaoScheduler {
 	@Autowired
 	private CartaoFeignClient cartaoFeignClient;
 	
+	
 	@Deprecated
 	public CartaoScheduler() {
 	}
@@ -38,16 +42,16 @@ public class CartaoScheduler {
 				
 				CartaoResponse cartaoResponse = cartaoFeignClient.cadastroCartao(proposta.getId());
 				
-				Cartao cartao = cartaoResponse.toModel();
+				proposta.setCartao(cartaoResponse.toModel()); 
 				
-				//System.out.println(cartao.getId());
+				propostaRepository.save(proposta);
 				
-				cartaoRepository.save(cartao);
+				System.out.println("Proposta de documento " + proposta.getDocumento() + " e cartao "+ cartaoResponse.getId() +" criados com sucesso!");
 				
 				
-			} catch (Exception e) {
+			} catch (FeignException e) {
 				
-				//System.out.println("Erro ao associar proposta ao cartão: " + proposta.getId());
+				 e.printStackTrace();
 				
 			}
 			

@@ -3,6 +3,7 @@ package br.com.zuporange.cartao;
 import java.time.LocalDateTime;
 
 import br.com.zuporange.proposta.Proposta;
+import br.com.zuporange.proposta.PropostaRepository;
 
 public class CartaoResponse {
 
@@ -32,7 +33,7 @@ public class CartaoResponse {
 		return limite;
 	}
 	
-    public Cartao toModel() {
+	public Cartao toModel() {
     	
     	return new Cartao(id, emitidoEm, titular, limite);
     	
