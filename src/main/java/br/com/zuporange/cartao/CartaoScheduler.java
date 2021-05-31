@@ -42,7 +42,13 @@ public class CartaoScheduler {
 				
 				CartaoResponse cartaoResponse = cartaoFeignClient.cadastroCartao(proposta.getId());
 				
-				proposta.setCartao(cartaoResponse.toModel()); 
+				Cartao cartao = cartaoResponse.toModel(propostaRepository);
+				
+				//proposta.setCartao(cartaoResponse.toModel()); 
+				
+				cartaoRepository.save(cartao);
+				
+				proposta.setCartao(cartao);
 				
 				propostaRepository.save(proposta);
 				

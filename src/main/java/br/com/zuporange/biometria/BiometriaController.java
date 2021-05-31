@@ -32,7 +32,7 @@ public class BiometriaController {
 	}
 	
 	@PostMapping("/biometria/{id}")
-	public ResponseEntity<?> cadastroBiometria(@PathVariable("id") Long id, @RequestBody @Valid BiometriaRequest request, UriComponentsBuilder builder){
+	public ResponseEntity<?> cadastroBiometria(@PathVariable("id") String id, @RequestBody @Valid BiometriaRequest request, UriComponentsBuilder builder){
 		
 		Optional<Cartao> existeCartao = cartaoRepository.findById(id);
 		

@@ -44,7 +44,7 @@ public class Proposta {
 	@Enumerated(EnumType.STRING)
 	private Status status;
 
-	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@OneToOne
 	private Cartao cartao;
 	
 	@Deprecated

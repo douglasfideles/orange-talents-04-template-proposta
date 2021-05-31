@@ -9,14 +9,19 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import br.com.zuporange.proposta.Proposta;
 
 @Entity
 public class Cartao {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@GeneratedValue(generator = "UUID")
+	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+	private String id;
+	
+	private String numeroCartao;
 	
 	private LocalDateTime emitidoEm = LocalDateTime.now();
 	
@@ -24,21 +29,30 @@ public class Cartao {
 	
 	private Integer limite;
 
+	@OneToOne(mappedBy = "cartao")
+	private Proposta proposta;
+	
     @Deprecated
 	public Cartao() {
 	}
     
-	public Cartao(Long id, LocalDateTime emitidoEm, String titular, Integer limite) {
+	public Cartao(String id, String numeroCartao, LocalDateTime emitidoEm, String titular, Integer limite, Proposta proposta) {
 		
 		this.id = id;
+		this.numeroCartao = numeroCartao;
 		this.emitidoEm = emitidoEm;
 		this.titular = titular;
 		this.limite = limite;
-
+		this.proposta = proposta;
+		
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
+	}
+	
+	public String getNumeroCartao() {
+		return numeroCartao;
 	}
 
 	public LocalDateTime getEmitidoEm() {
@@ -53,5 +67,10 @@ public class Cartao {
 		return limite;
 	}
 
+	public Proposta getProposta() {
+		return proposta;
+	}
+
+	
 
 }
