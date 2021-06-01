@@ -2,6 +2,8 @@ package br.com.zuporange.bloqueio;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -28,11 +30,30 @@ public class BloqueioCartaoController {
 
 
 	@PostMapping("/{id}")
-	public ResponseEntity<?> bloquearCartao(@RequestParam("id") String id, @RequestHeader(value = "user-agent") String userAgent, UriComponentsBuilder uriComponentsBuilder){
+	public ResponseEntity<?> bloquearCartao(@RequestParam("id") String id, @RequestHeader(value = "user-agent") String userAgent, HttpServletRequest request, UriComponentsBuilder uriComponentsBuilder){
 		
 		Optional<Cartao> checaCartao = cartaoRepository.findById(id);
 		
-		return null;
+		return checaCartao.map(cartaoEncontrado -> {
+			
+			if(cartaoEncontrado.bloqueado()) {
+				
+				return ResponseEntity.unprocessableEntity().body("Cartão bloqueado");
+				
+			}
+			
+			BloqueioCartao bloqueioCartao = new BloqueioCartao(request.getRemoteAddr(), userAgent, cartaoEncontrado);
+			executaBloqueio(bloqueioCartao, cartaoEncontrado);
+			
+			return ResponseEntity.ok().body("Cartão bloqueado");
+		}).orElseGet(() -> ResponseEntity.notFound().build());
+		
+	}
+
+
+
+	private void executaBloqueio(BloqueioCartao bloqueioCartao, Cartao cartaoEncontrado) {
+		
 		
 	}
 	

@@ -11,4 +11,5 @@ public interface PropostaRepository extends CrudRepository<Proposta, String>{
 
 	List<Proposta> findByStatus(Status elegivel);
 	
+	
 }

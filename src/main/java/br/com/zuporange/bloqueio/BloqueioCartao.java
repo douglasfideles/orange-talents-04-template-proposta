@@ -32,10 +32,9 @@ public class BloqueioCartao {
 	
 	}
 	
-	public BloqueioCartao(LocalDateTime horaBloqueio, String ipSolicitante, String userAgent,
+	public BloqueioCartao(String ipSolicitante, String userAgent,
 			Cartao cartao) {
 
-		this.horaBloqueio = horaBloqueio;
 		this.ipSolicitante = ipSolicitante;
 		this.userAgent = userAgent;
 		this.cartao = cartao;
