@@ -41,8 +41,6 @@ public class BloqueioCartao {
 		
 	}
 
-
-
 	public Long getId() {
 		return id;
 	}
@@ -63,7 +61,10 @@ public class BloqueioCartao {
 		return cartao;
 	}
 	
-	
+	public void bloquearCartao(Cartao cartao) {
+        cartao.adicionaBloqueio();
+        this.cartao = cartao;
+    }
 	
 	
 }

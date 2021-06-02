@@ -100,4 +100,8 @@ public class Cartao {
 		
 	}
 	
+	public void adicionaBloqueio() {
+        this.statusCartao = StatusCartao.BLOQUEADO;
+    }
+	
 }
