@@ -40,11 +40,8 @@ public class BloqueioCartaoController {
 		this.cartaoRepository = cartaoRepository;
 		this.cartaoFeignClient = cartaoFeignClient;
 		this.bloqueioCartaoRepository = bloqueioCartaoRepository;
-
 		
 	}
-
-
 
 	@PostMapping("/{id}")
 	public ResponseEntity<?> bloquearCartao(@RequestParam("id") String id, 
@@ -65,8 +62,6 @@ public class BloqueioCartaoController {
 		return bloquearCartao(checaCartao.get(), bloqueioRequest, request, uriComponentsBuilder);
 		
 	}
-
-
 
 	private ResponseEntity<?> bloquearCartao(Cartao cartao, @RequestBody @Valid BloqueioRequest bloqueioRequest,
 			HttpServletRequest request, UriComponentsBuilder uriComponentsBuilder) {
