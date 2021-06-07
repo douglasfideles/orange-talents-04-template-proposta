@@ -18,7 +18,7 @@ import br.com.zuporange.cartao.Cartao;
 import br.com.zuporange.cartao.CartaoRepository;
 
 @RestController
-@RequestMapping("/cartaoes")
+@RequestMapping("/biometria")
 public class BiometriaController {
 
 	private CartaoRepository cartaoRepository;
@@ -30,7 +30,7 @@ public class BiometriaController {
 		this.biometriaRepository = biometriaRepository;
 	}
 	
-	@PostMapping("/biometria/{id}")
+	@PostMapping("/{id}")
 	public ResponseEntity<?> cadastroBiometria(@PathVariable("id") String id, @RequestBody @Valid BiometriaRequest request, UriComponentsBuilder builder){
 		
 		Optional<Cartao> existeCartao = cartaoRepository.findById(id);

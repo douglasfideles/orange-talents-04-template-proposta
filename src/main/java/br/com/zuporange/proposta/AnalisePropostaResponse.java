@@ -4,7 +4,7 @@ public class AnalisePropostaResponse {
 	
 	private String documento;
 	private String nome;
-	private String id;
+	private String idProposta;
 	private ResultadoSolicitacao resultadoSolicitacao;
 
 	public String getDocumento() {
@@ -15,8 +15,8 @@ public class AnalisePropostaResponse {
 		return nome;
 	}
 
-	public String getId() {
-		return id;
+	public String getIdProposta() {
+		return idProposta;
 	}
 
 	public ResultadoSolicitacao getResultadoSolicitacao() {

@@ -47,7 +47,12 @@ public class PropostaController {
 		try {
 			
 			AnalisePropostaRequest analiseRequest = new AnalisePropostaRequest(proposta.getDocumento(), proposta.getNome(), proposta.getId());
+			
+			
 			AnalisePropostaResponse resultadoConsulta =  propostaFeignClient.solicitacao(analiseRequest);
+			
+			System.out.println(resultadoConsulta.getIdProposta());
+			
 			Status status = resultadoConsulta.status();
 			proposta.setStatus(status);
 			
@@ -55,11 +60,14 @@ public class PropostaController {
 			
 			proposta.setStatus(Status.NAO_ELEGIVEL);
 			
+		} catch (FeignException.ServiceUnavailable serviceUnvailable) {
+			propostaRepository.delete(proposta);
 		}
 		
 		
 		propostaRepository.save(proposta);		
 		URI uriProposta = uriComponentsBuilder.path("/propostas/{id}").build(proposta.getId());
+		
 		return ResponseEntity.created(uriProposta).body(new PropostaResponse(proposta));
 		
 	}

@@ -4,16 +4,16 @@ public class AnalisePropostaRequest {
 	
 	private String documento;
 	private String nome;
-	private String id;
+	private String idProposta;
 	
 	@Deprecated
 	public AnalisePropostaRequest() {}
 	
-	public AnalisePropostaRequest(String documento, String nome, String id) {
+	public AnalisePropostaRequest(String documento, String nome, String idProposta) {
 
 		this.documento = documento;
 		this.nome = nome;
-		this.id = id;
+		this.idProposta = idProposta;
 	}
 
 	public String getDocumento() {
@@ -24,8 +24,8 @@ public class AnalisePropostaRequest {
 		return nome;
 	}
 
-	public String getId() {
-		return id;
+	public String getidProposta() {
+		return idProposta;
 	}
 	
 	

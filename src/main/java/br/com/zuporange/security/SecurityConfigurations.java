@@ -21,7 +21,8 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests(authorizeRequests ->
         authorizeRequests
                 
-                .antMatchers(HttpMethod.POST, "/propostas/**").hasAuthority("SCOPE_propostaconnect-scope")
+                .antMatchers(HttpMethod.POST, "/propostas/**").hasAuthority("SCOPE_propostaconnect")
+                .antMatchers(HttpMethod.POST, "/biometria/**").hasAuthority("SCOPE_propostaconnect")
                 .anyRequest().authenticated()
 		)
 		.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);

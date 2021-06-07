@@ -47,9 +47,9 @@ public class Cartao {
 	public Cartao() {
 	}
     
-	public Cartao(String id, String numeroCartao, LocalDateTime emitidoEm, String titular, Integer limite, Proposta proposta) {
+	public Cartao(String numeroCartao, LocalDateTime emitidoEm, String titular, Integer limite, Proposta proposta) {
 		
-		this.id = id;
+
 		this.numeroCartao = numeroCartao;
 		this.emitidoEm = emitidoEm;
 		this.titular = titular;

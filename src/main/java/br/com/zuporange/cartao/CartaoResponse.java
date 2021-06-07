@@ -42,7 +42,7 @@ public class CartaoResponse {
 	public Cartao toModel(PropostaRepository propostaRepository) {
     	
 		Proposta proposta = propostaRepository.findById(idProposta).get();
-    	return new Cartao(id, numeroCartao, emitidoEm, titular, limite, proposta);
+    	return new Cartao(numeroCartao, emitidoEm, titular, limite, proposta);
     	
     }
     
