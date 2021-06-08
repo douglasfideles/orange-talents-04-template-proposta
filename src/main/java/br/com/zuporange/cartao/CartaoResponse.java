@@ -8,7 +8,6 @@ import br.com.zuporange.proposta.PropostaRepository;
 public class CartaoResponse {
 
 	private String id;
-    private String numeroCartao;
     private String titular;
     private LocalDateTime emitidoEm;
     private Integer limite;
@@ -17,10 +16,6 @@ public class CartaoResponse {
     
 	public String getId() {
 		return id;
-	}
-	
-	public String getNumeroCartao() {
-		return numeroCartao;
 	}
 	
 	public String getTitular() {
@@ -42,7 +37,7 @@ public class CartaoResponse {
 	public Cartao toModel(PropostaRepository propostaRepository) {
     	
 		Proposta proposta = propostaRepository.findById(idProposta).get();
-    	return new Cartao(numeroCartao, emitidoEm, titular, limite, proposta);
+    	return new Cartao(id, emitidoEm, titular, limite, proposta);
     	
     }
     
